@@ -1,6 +1,7 @@
 import "./style.css";
 
 import * as THREE from "three";
+import { AmbientLight } from "three";
 
 const scene = new THREE.Scene();
 
@@ -22,10 +23,16 @@ camera.position.setZ(30);
 renderer.render(scene, camera);
 
 const geometry = new THREE.TorusGeometry(10, 3, 16, 100);
-const material = new THREE.MeshBasicMaterial({ color: 0xff6347, wireframe: true });
+const material = new THREE.MeshStandardMaterial({ color: 0xff6347 });
 const torus = new THREE.Mesh(geometry, material);
 
 scene.add(torus);
+
+const pointLight = new THREE.PointLight(0xffffff);
+pointLight.position.set(20,20,20);
+
+const ambientLight = new THREE.AmbientLight(0xffffff);
+scene.add(pointLight, ambientLight);
 
 function animate() {
   requestAnimationFrame(animate);
