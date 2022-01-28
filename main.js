@@ -33,18 +33,21 @@ const torus = new THREE.Mesh(geometry, material);
 //adding torus to scene
 scene.add(torus);
 
-//creating lighting for teh scene
+//lighting for teh scene
 const pointLight = new THREE.PointLight(0xffffff);
 pointLight.position.set(20, 20, 20);
 
-//creating wide lighting for the scene
+//wide lighting for the scene
 const ambientLight = new THREE.AmbientLight(0xffffff);
 scene.add(pointLight, ambientLight);
 
-//creating helpers for the scene and lighting
+//helpers for the scene and lighting
 const lightHelper = new THREE.PointLightHelper(pointLight);
 const gridHelper = new THREE.GridHelper(200, 50);
 scene.add(lightHelper, gridHelper);
+
+//orbit controls
+const controls = new OrbitControls(camera, renderer.domElement);
 
 //scene refreshing loop
 function animate() {
@@ -53,6 +56,8 @@ function animate() {
   torus.rotation.x += 0.01;
   torus.rotation.y += 0.005;
   torus.rotation.z += 0.01;
+
+  controls.update();
 
   renderer.render(scene, camera);
 }
