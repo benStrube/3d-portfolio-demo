@@ -33,7 +33,7 @@ const torus = new THREE.Mesh(geometry, material);
 //adding torus to scene
 scene.add(torus);
 
-//lighting for teh scene
+//lighting for the scene
 const pointLight = new THREE.PointLight(0xffffff);
 pointLight.position.set(20, 20, 20);
 
@@ -69,6 +69,31 @@ Array(200).fill().forEach(addStar);
 //scene background
 const spaceTexture = new THREE.TextureLoader().load("space.jpg");
 scene.background = spaceTexture;
+
+//avatar
+
+const avatarTexture = new THREE.TextureLoader().load("xpanxion.jpg");
+
+const avatar = new THREE.Mesh(
+  new THREE.BoxGeometry(3, 3, 3),
+  new THREE.MeshBasicMaterial({ map: avatarTexture })
+);
+
+scene.add(avatar);
+
+//moon
+const moonTexture = new THREE.TextureLoader().load("moon.jpg");
+const surfaceTexture = new THREE.TextureLoader().load("surface.jgp");
+
+const moon = new THREE.Mesh(
+  new THREE.SphereGeometry(3, 32, 32),
+  new THREE.MeshStandardMaterial({
+    map: moonTexture,
+    normalMap: surfaceTexture,
+  })
+);
+
+scene.add(moon);
 
 //scene refreshing loop
 function animate() {
